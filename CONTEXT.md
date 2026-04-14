@@ -262,13 +262,36 @@ devonthink-cli-swift/
 | 13 | Runtime optimization: Phase 2 (pALL batch fetch, dual-key, FourCC fixes) | ✅ Done |
 | 14 | Runtime optimization: Phase 4 (`record.id()` from batch, `get-record-properties` batch reuse) | ✅ Done |
 | 15 | Drop `devonthink` binary — only `dt` + `dt-cli` symlink | ✅ Done |
-| 16 | Public release setup: MIT license, Version.swift, CI/CD workflows, semantic-release | ✅ Done |
+| 16 | Public release setup: MIT license, Version.swift, CI/CD workflows, semantic-release | ⚠️ Partial |
 
 ### Performance summary
 `dt search` vs Node.js/osascript reference: **5.09× faster** (180ms vs 917ms).  
 See `docs/2026-04-14-runtime-optimization-plan.md` for full benchmark history.
 
-### Phase 9b completion details
+### Phase 16 completion details
+All release setup files created and committed. **Push to GitHub is blocked** — SSH operations
+on `github.com` use the `joerggellien4711` key, not `jghamburg`. HTTPS push requires the
+`workflow` scope token, but the tool call to embed the token in the remote URL was rejected.
+
+**To unblock (resume next session):**
+1. Confirm `jghamburg` token has `workflow` scope: `gh auth status`
+   - If not: `gh auth refresh -h github.com -s workflow`
+2. Push via HTTPS:
+   ```sh
+   TOKEN=$(gh auth token -h github.com)
+   git -C /path/to/devonthink-cli-swift \
+     remote set-url origin "https://jghamburg:${TOKEN}@github.com/jghamburg/devonthink-cli-swift.git"
+   git push -u origin main
+   git remote set-url origin git@github.com:jghamburg/devonthink-cli-swift.git
+   ```
+   Or configure an SSH key for `jghamburg` and push via SSH.
+3. After push: verify CI workflow runs at `github.com/jghamburg/devonthink-cli-swift/actions`
+4. Confirm no release was auto-triggered (correct — first push is all `chore:` commits)
+5. Trigger `v1.0.0`: `git commit --allow-empty -m "feat: native Swift CLI for DEVONthink 4 via ScriptingBridge"`
+
+---
+
+
 All gaps from the cross-check of Swift implementation vs TypeScript requirements have been fixed.
 See `docs/2026-04-14-gap-fix-plan.md` for the full list of 12 fixes applied.
 Build: 0 errors, 0 warnings. All 27 subcommands operational.
