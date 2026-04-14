@@ -1,5 +1,8 @@
 # devonthink-cli-swift
 
+[![CI](https://github.com/jghamburg/devonthink-cli-swift/actions/workflows/ci.yml/badge.svg)](https://github.com/jghamburg/devonthink-cli-swift/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
 Native Swift CLI for DEVONthink 4 using `ScriptingBridge.framework`.
 
 This project provides a terminal interface to DEVONthink databases, records,
@@ -37,6 +40,12 @@ This installs:
 
 - `dt` — main binary
 - `dt-cli` — symlink to `dt`
+
+> **macOS Gatekeeper note:** The binary is unsigned. On first run macOS may block it.
+> Remove the quarantine attribute with:
+> ```sh
+> xattr -d com.apple.quarantine ~/.local/bin/dt
+> ```
 
 ## Global Usage
 
@@ -165,3 +174,10 @@ Examples:
 - DEVONthink must be running for all commands except `is-running`
 - There is currently no `Tests/` target in the Swift package
 - The TypeScript sibling project is reference-only and not modified by this CLI
+
+## Acknowledgements
+
+Inspired by and built on the foundation of
+[dvcrn/devonthink-cli](https://github.com/dvcrn/devonthink-cli)
+by [David Mohl](https://github.com/dvcrn).
+Thank you, David.

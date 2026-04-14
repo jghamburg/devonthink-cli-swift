@@ -2,7 +2,6 @@ import ArgumentParser
 import Foundation
 
 /// Root command for the DEVONthink CLI.
-/// Provides `dt` and `devonthink` binaries with identical functionality.
 public struct DTCommand: ParsableCommand {
     public static let configuration = CommandConfiguration(
         commandName: "dt",
@@ -14,7 +13,7 @@ public struct DTCommand: ParsableCommand {
         Use --json for machine-readable output on any command.
         Use --help on any subcommand for detailed usage.
         """,
-        version: "1.0.0",
+        version: cliVersion,
         subcommands: [
             // Application state
             IsRunning.self,

@@ -172,6 +172,16 @@ devonthink-cli-swift/
 ├── Package.swift
 ├── Makefile                            ← build, install, uninstall
 ├── CONTEXT.md                          ← this file
+├── LICENSE                             ← MIT 2026 jghamburg
+├── AGENTS.md                           ← AI agent guidance
+├── README.md                           ← install, usage, CI badge, attribution
+├── .releaserc.json                     ← semantic-release config
+├── package.json                        ← semantic-release devDeps
+├── package-lock.json                   ← lockfile (committed)
+├── .github/
+│   └── workflows/
+│       ├── ci.yml                      ← swift build on push + PR (macos-15)
+│       └── release.yml                 ← semantic-release on main push
 ├── docs/
 │   ├── 2026-04-14-requirements.md          ← full requirements extracted from TS
 │   ├── 2026-04-14-gap-fix-plan.md          ← cross-check gap fixes (all done)
@@ -197,6 +207,7 @@ devonthink-cli-swift/
         ├── Bridge/
         │   ├── DEVONthink.h            ← generated, do not modify
         │   └── DevonthinkCore-Bridging-Header.h
+        ├── Version.swift               ← managed by semantic-release; do not edit manually
         ├── CliError.swift
         ├── Output/
         │   └── Output.swift
@@ -251,6 +262,7 @@ devonthink-cli-swift/
 | 13 | Runtime optimization: Phase 2 (pALL batch fetch, dual-key, FourCC fixes) | ✅ Done |
 | 14 | Runtime optimization: Phase 4 (`record.id()` from batch, `get-record-properties` batch reuse) | ✅ Done |
 | 15 | Drop `devonthink` binary — only `dt` + `dt-cli` symlink | ✅ Done |
+| 16 | Public release setup: MIT license, Version.swift, CI/CD workflows, semantic-release | ✅ Done |
 
 ### Performance summary
 `dt search` vs Node.js/osascript reference: **5.09× faster** (180ms vs 917ms).  

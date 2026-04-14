@@ -1,0 +1,11 @@
+{
+  "name": "devonthink-cli-swift",
+  "private": true,
+  "devDependencies": {
+    "semantic-release": "^24.0.0",
+    "@semantic-release/changelog": "^6.0.0",
+    "@semantic-release/exec": "^6.0.0",
+    "@semantic-release/git": "^10.0.0",
+    "@semantic-release/github": "^10.0.0"
+  }
+}

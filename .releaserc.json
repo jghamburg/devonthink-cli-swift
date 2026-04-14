@@ -1,0 +1,32 @@
+{
+  "branches": ["main"],
+  "plugins": [
+    "@semantic-release/commit-analyzer",
+    "@semantic-release/release-notes-generator",
+    "@semantic-release/changelog",
+    [
+      "@semantic-release/exec",
+      {
+        "prepareCmd": "sed -i '' 's/public let cliVersion = .*/public let cliVersion = \"${nextRelease.version}\"/' Sources/DevonthinkCore/Version.swift && swift build -c release && tar czf dt-${nextRelease.version}-macos-arm64.tar.gz -C .build/release dt"
+      }
+    ],
+    [
+      "@semantic-release/github",
+      {
+        "assets": [
+          {
+            "path": "dt-*-macos-arm64.tar.gz",
+            "label": "dt macOS arm64 binary (Apple Silicon)"
+          }
+        ]
+      }
+    ],
+    [
+      "@semantic-release/git",
+      {
+        "assets": ["CHANGELOG.md", "Sources/DevonthinkCore/Version.swift"],
+        "message": "chore(release): ${nextRelease.version} [skip ci]"
+      }
+    ]
+  ]
+}

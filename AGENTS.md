@@ -182,12 +182,48 @@ app.currentGroup     // ✅ (no ())
 
 ---
 
+## Commit convention (required)
+
+This project uses [Conventional Commits](https://www.conventionalcommits.org/) — semantic-release
+parses commit messages to determine version bumps and generate the changelog.
+
+| Prefix | Effect | Example |
+|--------|--------|---------|
+| `feat:` | minor version bump | `feat: add export command` |
+| `fix:` | patch version bump | `fix: handle empty search results` |
+| `BREAKING CHANGE:` (in footer) | major version bump | `feat!: rename --limit to --max-results` |
+| `chore:`, `docs:`, `refactor:`, `perf:` | no release | `chore: update dependencies` |
+
+**Never use the real email address in commits.** The repo is configured to use:
+```
+jghamburg@users.noreply.github.com
+```
+
+---
+
 ## Adding a new command
 
 1. Create `Sources/DevonthinkCore/Commands/MyCommand.swift`
 2. Register it in `Sources/DevonthinkCore/Commands/DTCommand.swift` subcommands array
 3. For any record property reads, use `batchFetchProperties` + batch helpers; never individual accessors in a loop
 4. Verify FourCC values against `DEVONthink.m` before using them
+
+---
+
+## CI/CD pipeline
+
+`.github/workflows/ci.yml` — runs `swift build` on every push and PR (`macos-15`, arm64).
+
+`.github/workflows/release.yml` — runs `npx semantic-release` on every push to `main`.
+Triggered only by `feat:` or `fix:` commits (per `.releaserc.json`). Requires `GITHUB_TOKEN`
+with `permissions: contents: write`. Semantic-release will:
+- Determine the next version from commit messages
+- Update `Sources/DevonthinkCore/Version.swift` via `sed`
+- Commit the version bump with `[skip ci]` to prevent a loop
+- Build the arm64 release binary and attach it as a GitHub Release asset
+- Publish a changelog
+
+**Do not manually edit `Sources/DevonthinkCore/Version.swift`** — it is managed by semantic-release.
 
 ---
 
