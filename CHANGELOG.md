@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/jghamburg/devonthink-cli-swift/compare/v1.0.0...v1.0.1) (2026-04-16)
+
+
+### Bug Fixes
+
+* run empty - test semantic-release ([64245a4](https://github.com/jghamburg/devonthink-cli-swift/commit/64245a484b382aed37ae9720fd1c372af05350c4))
+
 # 1.0.0 (2026-04-16)
 
 
