@@ -39,6 +39,7 @@ let package = Package(
                 .unsafeFlags([
                     "-import-objc-header",
                     "Sources/DevonthinkCore/Bridge/DevonthinkCore-Bridging-Header.h",
+                    "-disable-bridging-pch",
                 ]),
             ],
             linkerSettings: [
