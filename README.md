@@ -9,6 +9,21 @@ This project provides a terminal interface to DEVONthink databases, records,
 search, tagging, conversion, classification, and AI features without using JXA
 or `osascript` subprocesses.
 
+`dt search` completes in ~180ms — 5× faster than JXA/Node.js equivalents.
+
+## AI Agent Skills
+
+A SKILL.md definition for Claude Code, OpenCode, and compatible AI agents is
+bundled in `docs/skills/devonthink/`. Install it with:
+
+```sh
+cp -r docs/skills/devonthink ~/.agents/skills/devonthink
+```
+
+Once installed, the agent automatically loads the correct command surface,
+identifier rules, and safe-workflow runbook whenever you mention `devonthink`
+in a conversation. All generated commands use the `dt` binary.
+
 ## Binaries
 
 Both names are equivalent:
